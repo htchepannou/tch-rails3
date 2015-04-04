@@ -1,0 +1,2 @@
+<p>Hello <b>${name}</b>, you are <b>${age}</b> year(s) old</p>
+<p>Back to <a href="$request.contextPath/home">home</a></p>

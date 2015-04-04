@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <actionName>CUSTOM-War + Redeploy</actionName>
+        <displayName>War + Redeploy</displayName>
+        <goals>
+            <goal>compile</goal>
+            <goal>war:war</goal>
+            <goal>tomcat:undeploy</goal>
+            <goal>tomcat:deploy-only</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>CUSTOM-War + Deploy</actionName>
+        <displayName>War + Deploy</displayName>
+        <goals>
+            <goal>compile</goal>
+            <goal>war:war</goal>
+            <goal>tomcat:deploy-only</goal>
+        </goals>
+    </action>
+</actions>

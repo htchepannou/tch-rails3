@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- $Id: log4j.xml,v 1.2 2011/03/05 02:13:47 herve Exp $ -->
+
+<!--
+   | For more configuration infromation and examples see the Jakarta Log4j
+   | owebsite: http://jakarta.apache.org/log4j
+ -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+    
+    <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/${artifactId}.log"/>
+        <param name="Append" value="false"/>
+        
+        <!-- Rollover at midnight each day -->
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p (%t) [%c{1}] %m%n"/>
+        </layout>
+    </appender>
+    
+    
+    <!-- ================ -->
+    <!-- Limit categories -->
+    <!-- ================ -->
+    <logger name="${package}" additivity="false">
+        <level value="TRACE"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="com.tchepannou.rails" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="FILE"/>
+    </root>    
+</log4j:configuration>

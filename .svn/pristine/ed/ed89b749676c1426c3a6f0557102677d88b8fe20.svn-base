@@ -1,0 +1,22 @@
+<h1>Messaging Example</h1>
+
+<p>
+    This example shows how to send asynchronously messages.<br/>
+    The message is sent from <code>com.tchepannou.rails.sample.action.ExampleActionController.jmsSubmit()</code>,<br/>
+    The message is received by <code>com.tchepannou.rails.sample.action.ExampleActionController.say()</code>
+</p>
+<form method="post" action="$request.contextPath/example/jmsSubmit">
+    <table>
+        <tr>
+            <td>Type a Message</td>
+            <td><input name="msg" value="$!{msg}"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+<p>Back to <a href="$request.contextPath/home">home</a></p>

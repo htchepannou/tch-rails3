@@ -1,0 +1,27 @@
+<h1>Form Example</h1>
+
+<!-- Display validation error -->
+#set ($errors = $flash.get("error"))
+#if ($errors.size() > 0)
+<ul>
+    #foreach ($error in $errors)
+        <li><font color="red">$util.encodeHtml($error)</font></li>
+    #end
+</ul>
+#end
+
+<form enctype="multipart/form-data" method="post" action="$request.contextPath/example/uploadSubmit">
+    <table>
+        <tr>
+            <td>File <small>(required)</small></td>
+            <td><input name="file" type="file"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+<p>Back to <a href="$request.contextPath/home">home</a></p>

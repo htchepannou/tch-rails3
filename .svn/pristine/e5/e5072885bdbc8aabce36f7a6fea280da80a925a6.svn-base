@@ -1,0 +1,223 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tchepannou.rails.core.cache;
+
+import com.tchepannou.rails.core.annotation.Cacheable;
+import com.tchepannou.rails.core.exception.InitializationException;
+import com.tchepannou.util.StringUtil;
+import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import net.spy.memcached.AddrUtil;
+import net.spy.memcached.ConnectionFactory;
+import net.spy.memcached.KetamaConnectionFactory;
+import net.spy.memcached.MemcachedClient;
+import net.spy.memcached.OperationTimeoutException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Implementation of {@link Cache} that used memcached.<br/>
+ * This implementation expect the following configuration parameters:
+ * <ul>
+ *  <li><code>memcached.clients</code>:Number of clients to memcached server (default: 21)</li>
+ *  <li><code>memcached.server</code>:List of memcached servers in the format <code>server_ip1:server_port1 server_ip2:server_port2 ... server_ip<i>n</i>:server_port<i>n</i></code></li>
+ *  <li><code>memcached.connection factory classname (default: <code>net.spy.memcached.KetamaConnectionFactory</code>)</li>
+ * </ul>
+ * 
+ * @author herve
+ */
+public class Memcached
+    implements Cache
+{
+    //-- Attributes
+    private static final Logger LOG = LoggerFactory.getLogger (Memcached.class);
+    
+    /* Memcached client */
+    private MemcachedClient[] _clients;
+    
+    /** TimeToLive */
+    private int _ttl;
+    
+    
+    //-- Cache override
+    public void init (Properties props)
+    {
+        if (LOG.isTraceEnabled ())
+        {
+            LOG.trace("init(" + props + ")");
+        }
+        
+        LOG.info ("Initializing : " + props);
+        int clients = StringUtil.toInt (props.getProperty ("memcached.clients"), 21);
+        String servers = props.getProperty ("memcached.servers");
+        _ttl = StringUtil.toInt (props.getProperty ("memcached.ttl"), 3600);
+        String cfclass = props.getProperty ("memcached.connection");
+        if (cfclass == null)
+        {
+            cfclass = KetamaConnectionFactory.class.getName ();
+        }
+        
+        LOG.info ("Initializing " + clients + " clients");
+        _clients = new MemcachedClient[ clients ];
+        List<InetSocketAddress> addresses = AddrUtil.getAddresses(servers);
+        for (int i=0 ; i<_clients.length ; i++)
+        {
+            try
+            {                
+                ConnectionFactory cf = (ConnectionFactory)Class.forName (cfclass).newInstance ();
+                MemcachedClient c =  new MemcachedClient(cf, addresses);
+                _clients[i] = c;
+            }
+            catch (Exception e)
+            {
+                throw new InitializationException ("Unable to initialize memcached client", e);
+            }
+        }
+    }
+
+    public Object get (Object key)
+    {
+        if (LOG.isTraceEnabled ())
+        {
+            LOG.trace("get(" + key + ")");
+        }
+        
+        try
+        {
+            Object obj = getClient ().get (key.toString ());
+            return obj;
+        }
+        catch (OperationTimeoutException e)
+        {
+            LOG.warn ("Timeout erorr", e);
+            return null;
+        }
+        catch (IllegalStateException e)
+        {
+            LOG.warn ("Access error", e);
+            return null;
+        }        
+    }
+
+    public void put (Object key, Object o)
+    {
+        if (LOG.isTraceEnabled ())
+        {
+            LOG.trace("put(" + key + "," + o + ")");
+        }
+        try
+        {
+            if (o != null)
+            {
+                int ttl = ttl(o);
+                getClient ().set (key.toString (), ttl, o);
+            }
+            else
+            {
+                remove (key);
+            }
+        }
+        catch (IllegalStateException e)
+        {
+            LOG.warn ("Access error", e);
+        }
+    }
+
+    public Object remove (Object key)
+    {
+        if (LOG.isTraceEnabled ())
+        {
+            LOG.trace("remove(" + key + ")");
+        }
+        try
+        {
+            return getClient ().delete (key.toString ());
+        }
+        catch (IllegalStateException e)
+        {
+            LOG.warn ("Access error", e);
+            return null;
+        }
+    }
+
+    public Map mget (List keys)
+    {
+        if (LOG.isTraceEnabled ())
+        {
+            LOG.trace("mget(" + keys + ")");
+        }
+        try
+        {
+            return getClient ().getBulk (keys);
+        }
+        catch (OperationTimeoutException e)
+        {
+            LOG.warn ("Timeout erorr", e);
+            return null;
+        }
+        catch (IllegalStateException e)
+        {
+            LOG.warn ("Access error", e);
+            return null;
+        }
+    }
+
+    public void mput (Map data)
+    {
+        if (LOG.isTraceEnabled ())
+        {
+            LOG.trace("mput(" + data + ")");
+        }
+        for (Object key : data.keySet ())
+        {
+            Object value = data.get (key);
+            if (value != null)
+            {
+                put (key, value);
+            }
+        }
+    }
+
+    public Map mremove (List keys)
+    {
+        if (LOG.isTraceEnabled ())
+        {
+            LOG.trace("mremove(" + keys + ")");
+        }
+        Map data =new HashMap ();
+        for (Object key : keys)
+        {
+            Object value = remove (key);
+            if (value != null)
+            {
+                data.put (key, value);
+            }
+        }
+        return data;
+    }
+        
+    
+    //-- Private
+    private MemcachedClient getClient ()
+    {
+        int i = (int)(Math.random () * _clients.length);
+        return _clients[i];
+    }
+    
+    private int ttl (Object value)
+    {
+        int ttl = 0;
+        Object c = value.getClass ().getAnnotation (Cacheable.class);
+        if (c instanceof Cacheable)
+        {
+            ttl = ((Cacheable)c).ttl ();
+        }
+        
+        return ttl > 0 ? ttl : _ttl;
+    }
+}

@@ -1,0 +1,31 @@
+<h1>Form Example</h1>
+
+<!-- Display validation error -->
+#set ($errors = $flash.get("error"))
+#if ($errors.size() > 0)
+<ul>
+    #foreach ($error in $errors)
+        <li><font color="red">$util.encodeHtml($error)</font></li>
+    #end
+</ul>
+#end
+
+<form method="post" action="$request.contextPath/example/formSubmit">
+    <table>
+        <tr>
+            <td>Your name <small>(required)</small></td>
+            <td><input name="name" value="$!{name}"/></td>
+        </tr>
+        <tr>
+            <td>Your age <small>(required)</small></td>
+            <td><input name="age" value="$!{age}" length="2"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+<p>Back to <a href="$request.contextPath/home">home</a></p>

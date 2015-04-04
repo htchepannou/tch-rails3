@@ -1,0 +1,45 @@
+.required
+{
+    color: darkred;
+    font-weight: bold;
+}
+
+.counter 
+{
+    display: none;
+}
+
+td.table-label
+{
+    background: #f5f5f5;
+    width: 20%;
+}
+
+table.table td .btn-toolbar
+{
+    margin: 0;
+}
+table.table td .btn-toolbar select
+{
+    display: inline;
+}
+table.table td form
+{
+    margin: 0;    
+}
+table.table td p
+{
+    margin: 0;
+}
+table.table td input,
+table.table td textarea
+{
+    width: 99%;
+}
+table.table td input[type="checkbox"],
+table.table td input[type="radio"],
+table.table td input[type="file"],
+table.table td input.search-query
+{
+    width: auto;
+}

@@ -1,0 +1,20 @@
+#if ($flash.containsKey("error") || $flash.containsKey("notice"))
+    #set ($_css  = false)
+    #set ($_msgs = $flash.get("error"))
+    #if ($_msgs.size() > 0)
+        #set ($_css  = "error")
+    #else
+        #set ($_msgs = $flash.get("notice"))
+        #if ($_msgs.size() > 0)
+            #set ($_css  = "success")
+        #end
+    #end
+
+    #if ($_css)
+        <div class="alert alert-${_css}">
+            #foreach ($msg in $_msgs)
+                <p>$msg</p>
+            #end
+        </div>
+    #end
+#end

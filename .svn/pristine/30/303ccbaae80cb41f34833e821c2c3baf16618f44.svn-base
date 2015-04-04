@@ -1,0 +1,43 @@
+########################################################################
+#
+# VELOCITY CONFIGURATION
+#
+# Author: Herve Tchepannou
+# See: http://velocity.apache.org/engine/devel/developer-guide.html#Velocity_Configuration_Keys_and_Values
+#
+#
+########################################################################
+
+
+#------------------------------------------------------
+# RESOURCES
+#------------------------------------------------------
+resource.loader=file
+file.resource.loader.class=org.apache.velocity.runtime.resource.loader.FileResourceLoader
+file.resource.loader.path=<will be changed at runtime>
+file.resource.loader.cache=true
+file.resource.loader.modificationCheckInterval = 5
+
+
+#------------------------------------------------------
+# MACRO
+#------------------------------------------------------
+velocimacro.library.autoreload=true
+velocimacro.arguments.strict=true
+
+
+#------------------------------------------------------
+# VELOCITY LOG CONFIGURATION
+#------------------------------------------------------
+#runtime.log = /opt/tomcat/logs/velocity.log
+runtime.log.invalid.references = true
+
+
+#------------------------------------------------------
+# MISC
+#------------------------------------------------------
+#runtime.references.strict=true
+#directive.set.null.allowed=true
+parser.pool.size=100
+input.encoding=UTF-8
+output.encoding=UTF-8

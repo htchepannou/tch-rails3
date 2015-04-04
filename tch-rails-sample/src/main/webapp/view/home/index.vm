@@ -1,0 +1,25 @@
+
+<html>
+<head>
+    <title>Rails Examples</title>
+</head>
+<body>
+<h1>Rails Examples</h1>
+
+<ul>
+    <li><a href="$request.contextPath/example/view">Rendering a View</a></li>
+    <li><a href="$request.contextPath/example/text">Rendering a Text</a></li>
+    <li><a href="$request.contextPath/example/pdf">Rendering a Resource</a></li>
+    <li><a href="$request.contextPath/example/file">Rendering a File</a></li>
+    <li><a href="$request.contextPath/example/secure">Access to Secured Page</a></li>
+</ul>
+<ul style="margin-top: 10px">
+    <li><a href="$request.contextPath/example/form">Working with Forms</a></li>
+    <li><a href="$request.contextPath/example/upload">Uploading files</a></li>
+</ul>
+<ul style="margin-top: 10px">
+    <li><a href="$request.contextPath/example/jms">Sending Message Asynchronously</a></li>
+    <li></li>
+</ul>
+</body>
+</html>

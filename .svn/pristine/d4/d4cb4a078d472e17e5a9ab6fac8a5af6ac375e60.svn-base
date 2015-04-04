@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        #parse("/template/_include/head.vm")
+    </head>
+    <body>
+        #parse("/template/_include/navigation.vm")
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1">&nbsp;</div>
+                <div class="span10">
+                    #parse("/template/_include/flash.vm")
+
+                    $__content
+                </div>
+                <div class="span1">&nbsp;</div>
+            </div>
+        </div>
+    </body>
+</html>

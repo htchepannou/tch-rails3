@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rails>
+    <base-package>com.tchepannou.rails</base-package>
+    <login-url>/login</login-url>
+    <persistence-unit>test</persistence-unit>
+    
+    <action-interceptors>
+        <interceptor>com.tchepannou.rails.engine.interceptor.ExceptionInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.ActionDebugInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.EntityManagerInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.TransactionInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.ActionRequireUserInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.I18nInterceptor</interceptor>
+    </action-interceptors>
+
+    <job-interceptors>
+        <interceptor>com.tchepannou.rails.engine.interceptor.ExceptionInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.EntityManagerInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.TransactionInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.I18nInterceptor</interceptor>
+    </job-interceptors>
+
+    <mail-interceptors>
+        <interceptor>com.tchepannou.rails.engine.interceptor.ExceptionInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.EntityManagerInterceptor</interceptor>
+    </mail-interceptors>
+
+    <message-interceptors>
+        <interceptor>com.tchepannou.rails.engine.interceptor.ExceptionInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.EntityManagerInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.TransactionInterceptor</interceptor>
+        <interceptor>com.tchepannou.rails.engine.interceptor.I18nInterceptor</interceptor>
+    </message-interceptors>
+
+    <services>
+        <service type="com.tchepannou.rails.core.api.OptionService">
+            com.tchepannou.rails.core.service.PropertiesOptionService
+        </service>
+        <service type="com.tchepannou.rails.core.api.UserService">
+            com.tchepannou.rails.core.service.PropertiesUserService
+        </service>
+        <service type="com.tchepannou.rails.core.api.RenderService">
+            com.tchepannou.rails.core.service.VelocityRenderService
+        </service>
+        <service type="com.tchepannou.rails.core.api.MessagingService">
+            com.tchepannou.rails.core.service.EmbeddedActiveMQService
+        </service>
+    </services>
+
+    <jobs>
+        <job expr="0 1 * * * ?">com.tchepannou.social.mq.job.NodePopularityIndexerJobController</job>
+    </jobs>
+</rails>

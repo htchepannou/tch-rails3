@@ -1,0 +1,2 @@
+<p>Message <b>${msg}</b> send asynchronously to <b>/example/say</b></p>
+<p>Back to <a href="$request.contextPath/home">home</a></p>

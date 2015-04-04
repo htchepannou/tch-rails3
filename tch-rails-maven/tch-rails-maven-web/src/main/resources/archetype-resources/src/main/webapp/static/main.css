@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+
+}
+
+body {
+    margin: 0;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 1.3em;
+}
+
+img {
+    border: 0;
+}
+
+a
+{
+    color: blue;
+}
+
+.alt
+{
+    background: #E8E8E8;
+}
+
+.clear
+{
+    clear: both;
+}
+
+
+
+/*== LAYOUT ==*/
+header.body
+{
+    width: 1100px;
+    margin: 0 auto;
+}
+
+nav.body
+{
+    clear: both;
+    margin: 0 auto;
+    width: 1100px;
+    background: white;
+}
+
+section.body
+{
+    clear: both;
+    margin: 0 auto;
+    width: 1100px;
+    background: white;
+}
+
+footer.body
+{
+    clear: both;
+    margin: 0 auto;
+    padding-top: 50px;
+    width: 1100px;
+    background: white;
+}
+
+
+
+/*== FLASH MESSAGE ==*/
+#flash
+{
+    width: 98%;
+    margin: 10px auto;
+}
+#flash p
+{
+    margin: 1em 0 0 0;
+}
+#flash h3
+{
+    color: #333333;
+}
+#flash .error
+{
+    background-color:#FFEBE8;
+    border: 1px solid #DD3C10;
+    padding: 1em;
+}
+#flash .notice
+{
+    background-color:#FFF8CB;
+    border: 1px solid #DCBE00;
+    padding: 1em;
+}
+
+
+
+/*== BUTTONS ==*/
+.button
+{
+    background: lightgray;
+    padding: 5px 8px;
+    border: 1px solid white;
+    outline: 1px outset #999;
+    color: black;
+    font-weight: bold;
+    display: inline-block;
+}
+.button a
+{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.button_special
+{
+    background: #609946;
+    padding: 5px 8px;
+    border: 1px solid white;
+    outline: 1px outset #999;
+    color: white;
+    display: inline-block;
+    font-weight: bold;
+}
+.button_special a
+{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+a.button,
+a.button_special
+{
+    text-decoration: none;
+}
+.button_small
+{
+    font-size: .7em;
+    padding: 2px 4px;
+}
+

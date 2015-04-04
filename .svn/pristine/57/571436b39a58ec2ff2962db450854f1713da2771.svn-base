@@ -1,0 +1,9 @@
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
+hibernate.connection.datasource=java:comp/env/jdbc/insidesoccer
+hibernate.max_fetch_depth=32
+hibernate.show_sql=true
+
+hibernate.cache.use_second_level_cache=false
+hibernate.cache.use_query_cache=false

@@ -1,0 +1,69 @@
+#set ($_pathInfo = $request.pathInfo)
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <ul class="nav">
+                <li>
+                    <a href="$request.contextPath/" class="brand">$util.getOption("site.title", "")</a>
+                </li>
+                
+            #if (!$_pathInfo.startsWith("/login"))
+                ##
+                ## Navigation option when the user is logged in
+                ##
+                
+                <li>
+                    <a href="$request.contextPath/home" #if ($_pathInfo.equals("/") || $_pathInfo.equals("/home")) class="active" #end>Home</a>
+                </li>
+                <li>
+                    <a href="#" #if ($_pathInfo.equals("/about")) class="active" #end>About</a>
+                </li>
+            #end
+            </ul>
+            
+        ##
+        ## User information
+        ##
+        #if ($user)
+            <ul class="nav pull-right">
+                
+                ##
+                ## Uncomment the next bloc if you support search
+                ##
+                <!--
+                <li class="divider-vertical"></li>
+                <li>
+                    <form action="$request.contextPath/search"  class="navbar-search">
+                        <input type="text" class="search-query" placeholder="Search" name="q" />
+                    </form>
+                </li>
+                -->
+                
+                
+                <li class="divider-vertical"></li>
+                <li>
+                    <div class="btn-group">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                            $util.encodeHtml($user.displayName)
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Preferences</a></li>
+                            <li class="divider"></li>
+                            <li><a href="$request.contextPath/logout">Sign out</a></li>
+                        </ul>
+                    </div>                    
+                </li>
+            </ul> 
+        #elseif (!$_pathInfo.startsWith("/login"))
+            <ul class="nav pull-right">
+                <li class="divider-vertical"></li>
+                <li>
+                    <a href="$request.contextPath/login">Login</a>
+                </li>
+            </ul>
+        #end
+        </div>
+    </div>            
+</div>

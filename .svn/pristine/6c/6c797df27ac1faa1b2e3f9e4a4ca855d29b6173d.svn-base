@@ -1,0 +1,2 @@
+<p>The file <b>$name</b> has been uploaded. <b>${size}</b> bytes uploaded</p>
+<p>Back to <a href="$request.contextPath/home">home</a></p>

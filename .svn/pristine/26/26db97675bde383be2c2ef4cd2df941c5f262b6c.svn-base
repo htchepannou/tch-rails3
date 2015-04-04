@@ -1,0 +1,11 @@
+{
+#if ($errors)
+    "errors": [
+    #foreach ($err in $errors)
+        #if ($velocityCount > 1) , #end
+        "$err"
+    #end
+    ]
+#else
+#end
+}

@@ -1,0 +1,2 @@
+<p>${hello}</p>
+<p>Back to <a href="$request.contextPath/home">home</a></p>

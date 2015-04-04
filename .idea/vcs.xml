@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tch-rails-activemq" vcs="" />
+    <mapping directory="$PROJECT_DIR$/tch-rails-core" vcs="" />
+    <mapping directory="$PROJECT_DIR$/tch-rails-engine" vcs="" />
+    <mapping directory="$PROJECT_DIR$/tch-rails-junit" vcs="" />
+    <mapping directory="$PROJECT_DIR$/tch-rails-maven/tch-rails-maven-siena" vcs="" />
+    <mapping directory="$PROJECT_DIR$/tch-rails-maven/tch-rails-maven-web" vcs="" />
+    <mapping directory="$PROJECT_DIR$/tch-rails-mock" vcs="" />
+    <mapping directory="$PROJECT_DIR$/tch-rails-quartz" vcs="" />
+    <mapping directory="$PROJECT_DIR$/tch-rails-siena" vcs="" />
+  </component>
+</project>
