@@ -1,3 +1,0 @@
-<p>This is a secured page</p>
-<p>You must login in order to access this page</p>
-<p>Back to <a href="$request.contextPath/home">home</a></p>

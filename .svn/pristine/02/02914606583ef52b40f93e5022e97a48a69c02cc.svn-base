@@ -1,3 +1,0 @@
-db.hostname=localhost
-db.name=tch-rails-sample
-db.base-package=com.tchepannou.rails.sample.domain

@@ -1,1 +1,0 @@
-&copy;$util.year - $util.getOption("site.title", "")

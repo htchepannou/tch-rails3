@@ -1,9 +1,0 @@
-<h2 style="color: darkred">We're sorry! An unexpected error has occured.</h2>
-
-<p>Regrettably, a problem has occured. </p>
-
-<p>Our customer support has been notified and will be investigating the issue.</p>
-
-<p>You can go back to the <a href="$request.contextPath/">Home page</a> </p>
-
-<p>Thank you.</p>
